@@ -25,6 +25,8 @@ namespace ProgrammersBlog.Mvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddAutoMapper(typeof(Startup));
             services.LoadMyServices();
         }
 
@@ -34,6 +36,7 @@ namespace ProgrammersBlog.Mvc
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
             }
             else
             {
@@ -51,6 +54,12 @@ namespace ProgrammersBlog.Mvc
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    name:"Admin",
+                    areaName:"Admin",
+                    pattern:"Admin/{controller=Home}/{action=Index}/{id?}"
+                    );
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
         }
