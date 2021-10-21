@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,8 +33,24 @@ namespace ProgrammersBlog.Mvc
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
             });
+            services.AddSession();
             services.AddAutoMapper(typeof(CategoryProfile),typeof(ArticleProfile));
             services.LoadMyServices();
+            services.ConfigureApplicationCookie(options=>
+            {
+                options.LoginPath = new PathString("/Admin/User/Login");
+                options.LogoutPath = new PathString("/Admin/User/Logout");
+                options.Cookie = new CookieBuilder
+                {
+                    Name = "ProgrammersBlog",
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.Strict,
+                    SecurePolicy = CookieSecurePolicy.SameAsRequest  //Always olmalý
+                };
+                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = System.TimeSpan.FromDays(7);
+                options.AccessDeniedPath = new PathString("/Admin/User/AccessDenied");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +60,7 @@ namespace ProgrammersBlog.Mvc
             {
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();
-            }
+            }           
             else
             {
                 app.UseExceptionHandler("/Error");
@@ -52,10 +69,11 @@ namespace ProgrammersBlog.Mvc
             }
 
             app.UseHttpsRedirection();
+            app.UseSession();
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
