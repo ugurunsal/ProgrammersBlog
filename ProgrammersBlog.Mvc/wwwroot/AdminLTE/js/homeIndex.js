@@ -202,6 +202,7 @@
                     "title": "Kayıtları sil"
                 }
             }
-        }
+        },
+        "order":[[4,"desc"]]
     });
 });
