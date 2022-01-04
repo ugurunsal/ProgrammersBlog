@@ -31,6 +31,8 @@ namespace ProgrammersBlog.Services.Abstract
 
         Task<IDataResult<ArticleListDto>> SearchAsync(string keyword, int currentPage = 1, int pageSize = 5, bool isAscending = false);
 
+        Task<IResult> IncreaseViewCountAsync(int articleId);
+
         Task<IResult> AddAsync(ArticleAddDto articleAddDto, string createdByName, int userId);
 
         Task<IResult> UpdateAsync(ArticleUpdateDto articleUpdateDto, string modifiedByName);
