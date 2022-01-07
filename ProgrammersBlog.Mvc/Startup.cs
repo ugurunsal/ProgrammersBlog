@@ -34,6 +34,7 @@ namespace ProgrammersBlog.Mvc
         {
             services.Configure<AboutUsPageInfo>(Configuration.GetSection("AboutUsPageInfo"));
             services.Configure<WebsiteInfo>(Configuration.GetSection("WebsiteInfo"));
+            services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
             services.AddRazorPages();
             services.AddControllersWithViews(options=>
             {
