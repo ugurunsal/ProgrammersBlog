@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using NToastNotify;
 using ProgrammersBlog.Entities.Complex_Types;
 using ProgrammersBlog.Entities.Concrete;
@@ -26,7 +27,9 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IToastNotification _toastNotification;
 
-        public ArticleController(IArticleService articleService, ICategoryService categoryService, IMapper mapper, UserManager<User> userManager, IImageHelper imageHelper, IToastNotification toastNotification) : base(userManager, mapper, imageHelper)
+        public ArticleController(IArticleService articleService, ICategoryService categoryService, IMapper mapper, UserManager<User> userManager, 
+            IImageHelper imageHelper, IToastNotification toastNotification) 
+            : base(userManager, mapper, imageHelper)
         {
             _articleService = articleService;
             _categoryService = categoryService;
