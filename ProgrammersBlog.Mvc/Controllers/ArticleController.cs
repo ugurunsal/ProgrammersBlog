@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using ProgrammersBlog.Entities.Complex_Types;
 using ProgrammersBlog.Entities.Concrete;
+using ProgrammersBlog.Mvc.Attributes;
 using ProgrammersBlog.Mvc.Models;
 using ProgrammersBlog.Services.Abstract;
 using ProgrammersBlog.Shared.Utilities.Results.ComplexTypes;
@@ -39,6 +40,7 @@ namespace ProgrammersBlog.Mvc.Controllers
         }
 
         [HttpGet]
+        [ViewCountFilter]
         public async Task<IActionResult> Detail(int articleId)
         {
             var articleResult = await _articleService.GetAsync(articleId);
@@ -49,7 +51,7 @@ namespace ProgrammersBlog.Mvc.Controllers
                     _articleRightSideBarWidgetOptions.CategoryId, _articleRightSideBarWidgetOptions.StartAt, _articleRightSideBarWidgetOptions.EndAt, 
                     _articleRightSideBarWidgetOptions.MinViewCount, _articleRightSideBarWidgetOptions.MaxViewCount, 
                     _articleRightSideBarWidgetOptions.MinCommentCount, _articleRightSideBarWidgetOptions.MaxCommentCount);
-                await _articleService.IncreaseViewCountAsync(articleId);
+                //await _articleService.IncreaseViewCountAsync(articleId);
                 return View(new ArticleDetailViewModel
                 {
                     ArticleDto = articleResult.Data,

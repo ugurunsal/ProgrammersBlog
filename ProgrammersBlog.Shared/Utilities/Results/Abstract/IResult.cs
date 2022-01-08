@@ -1,4 +1,5 @@
-﻿using ProgrammersBlog.Shared.Utilities.Results.ComplexTypes;
+﻿using ProgrammersBlog.Shared.Entities.Concrete;
+using ProgrammersBlog.Shared.Utilities.Results.ComplexTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace ProgrammersBlog.Shared.Utilities.Results.Abstract
         public string Message { get;}
 
         public Exception Exception { get;}
+
+        public IEnumerable<ValidationError> ValidationErrors { get; set; }
     }
 }

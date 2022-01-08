@@ -57,12 +57,12 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="startAtDatePicker" asp-for="StartAt"></label>
-                            <input type="text" id="startAtDatePicker" class="form-control" value="Model.StartAt.ToShortDateString()" asp-for="StartAt" />
+                            <input type="text" id="startAtDatePicker" class="form-control" value="@Model.StartAt.ToShortDateString()" asp-for="StartAt" />
                             <span asp-validation-for="StartAt" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="endAtDatePicker" asp-for="EndAt"></label>
-                            <input type="text" id="endAtDatePicker" class="form-control" value="Model.EndAt.ToShortDateString()" asp-for="EndAt" />
+                            <input type="text" id="endAtDatePicker" class="form-control" value="@Model.EndAt.ToShortDateString()" asp-for="EndAt" />
                             <span asp-validation-for="EndAt" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
