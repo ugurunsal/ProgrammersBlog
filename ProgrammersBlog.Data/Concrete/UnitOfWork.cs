@@ -26,11 +26,11 @@ namespace ProgrammersBlog.Data.Concrete
             await _context.DisposeAsync();
         }
 
-        public IArticleRepository Articles => _articleRepository ?? new EfArticleRepository(_context);
+        public IArticleRepository Articles => _articleRepository  ??= new EfArticleRepository(_context);
 
-        public ICategoryRepository Categories => _categoryRepository ?? new EfCategoryRepository(_context);
+        public ICategoryRepository Categories => _categoryRepository ??= new EfCategoryRepository(_context);
 
-        public ICommentRepository Comments => _commentRepository ?? new EfCommentRepository(_context);
+        public ICommentRepository Comments => _commentRepository ??= new EfCommentRepository(_context);
 
 
         public async Task<int> SaveAsync()
